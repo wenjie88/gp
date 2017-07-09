@@ -15,7 +15,7 @@
                 "lib/js/inject.js"
             ],
             "matches": [
-                "https://sellercentral.amazon.com/ap/signin?*"
+                "http://www.iwencai.com/*"
             ],
             "run_at": "document_end"
         }
@@ -32,7 +32,7 @@
     "name": "xx",
     //"http://localhost:9910/","http://120.197.244.213:5906/"
     "permissions": [
-        "http://vip.stock.finance.sina.com.cn/quotes_service/api/json_v2.php/Market_Center.getHQNodeData"
+        "http://www.iwencai.com/*"
     ],
     "version": "1.0",
     "content_security_policy": "script-src 'self' 'unsafe-eval'; object-src 'self'"
