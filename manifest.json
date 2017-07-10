@@ -12,7 +12,8 @@
     "content_scripts": [
         {
             "js": [
-                "lib/js/inject.js"
+                "lib/js/inject.js",
+                "lib/js/src/jquery.min.js"
             ],
             "matches": [
                 "http://www.iwencai.com/*"
@@ -20,8 +21,8 @@
             "run_at": "document_end"
         }
     ],
-    "description": "截取数据",
-    "homepage_url": "https://www.baidu.com",
+    "description": "tonghuasun",
+    "homepage_url": "http://www.iwencai.com/",
     "icons": {
         "128": "icon-128.png",
         "16": "icon-16.png",
@@ -30,7 +31,6 @@
     //    "key": "",
     "manifest_version": 2,
     "name": "xx",
-    //"http://localhost:9910/","http://120.197.244.213:5906/"
     "permissions": [
         "http://www.iwencai.com/*"
     ],
