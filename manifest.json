@@ -12,8 +12,8 @@
     "content_scripts": [
         {
             "js": [
-                "lib/js/inject.js",
-                "lib/js/src/jquery.min.js"
+                "lib/js/src/jquery.min.js",
+                "lib/js/inject.js"
             ],
             "matches": [
                 "http://www.iwencai.com/*"
