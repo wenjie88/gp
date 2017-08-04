@@ -2,6 +2,7 @@
     "author": "WenJie",
     "background": {
         "scripts": [
+            "lib/js/src/jquery.min.js",
             "lib/js/background.js"
         ]
     },
