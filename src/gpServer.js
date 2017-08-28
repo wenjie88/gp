@@ -1,3 +1,5 @@
+import GP from "./gp.js"
+
 
 const URL_search = "http://www.iwencai.com/stockpick/load-data";
 const URL_next_page = "http://www.iwencai.com/stockpick/cache";
@@ -37,7 +39,7 @@ export function GetGpDataAsync() {
             searchfilter: "",
             queryarea: "",
             preParams: "",
-            w: "",
+            w: "连续下跌3日，3日成交量, 10日均线，20日均线，30日均线，60日均线，180日均线，250日均线",
         }
         $.getJSON(URL_search, Server_Parmas, (response) => {
 
@@ -46,7 +48,8 @@ export function GetGpDataAsync() {
             var total = dataResult.total     //总数
             var perpage = dataResult.perpage //每页多少条
             var page = dataResult.page       //第1页
-            var result = response.data.result.result //所有列表
+            var result = dataResult.result //所有列表
+            var title = dataResult.title //所有列表标题
 
             //如果有下一页,无脑请求下一页
             var totalPage = Math.ceil(total / perpage)
@@ -65,6 +68,24 @@ export function GetGpDataAsync() {
             } else {
                 resolve(result)
             }
+
+
+            var index_code = title.indexOf("股票代码")
+            var index_name = title.indexOf("股票简称")
+            var index_nowPrice = title.indexOf("现价(元)")
+            var index_zhangdiefu = title.indexOf("涨跌幅(%)")
+
+            title.forEach(item => {
+                if (item instanceof object) {
+                    var key = (Object.keys(item))[0]
+                    if(/涨跌幅:前复权(%)/.test(key)){
+
+                    }
+                } else {
+
+                }
+            })
+
         })
     })
 }
