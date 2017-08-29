@@ -36,9 +36,9 @@ class GPFilter {
         var GroupFormat = {}
 
         this.gplist.forEach(item => {
-            var one = item.priceArr[0]
-            var two = item.priceArr[1]
-            var three = item.priceArr[2]
+            var one = item.priceArr[0] //29号
+            var two = item.priceArr[1]  //28号
+            var three = item.priceArr[2] //27号  由大到小
 
             var arr = [one, two, three].sort((a, b) => a - b)
 
