@@ -1,4 +1,5 @@
 import GP from "./gp.js"
+import $ from './jquery.min.js'
 
 
 const URL_search = "http://www.iwencai.com/stockpick/load-data";
@@ -25,9 +26,11 @@ function LoadNextPage(token, page, pageSize) {
     })
 }
 
-
-export function GetGpDataAsync() {
-    return new Promise((resolve, reject) => {
+/**
+ * @returns {GP[]} 
+ */
+export function GetGpData() {
+    return  new Promise((resolve, reject) => {
         const Server_Parmas = {
             ts: 1,
             f: 1,
@@ -41,6 +44,8 @@ export function GetGpDataAsync() {
             preParams: "",
             w: "连续下跌3日，3日成交量, 10日均线，20日均线，30日均线，60日均线，180日均线，250日均线",
         }
+
+
         $.getJSON(URL_search, Server_Parmas, (response) => {
 
             var dataResult = response.data.result
@@ -52,40 +57,26 @@ export function GetGpDataAsync() {
             var title = dataResult.title //所有列表标题
 
             //如果有下一页,无脑请求下一页
-            var totalPage = Math.ceil(total / perpage)
+            //如果有下一页,无脑请求下一页
+            var totalPage = Math.ceil(total / perpage);
             if (totalPage > 1) {
                 var promiseList = []
                 for (var i = 1; i < totalPage; i++) {
-                    promiseList.push(LoadNextPage(token, page + i, perpage))
+                    promiseList.push(LoadNextPage(token, page + i, perpage));
                 }
 
                 Promise.all(promiseList).then(resultArr => {
                     resultArr.forEach(item => {
-                        result.push(...item)
-                    })
-                    resolve(result)
-                })
-            } else {
-                resolve(result)
+                        result.push(...item);
+                    });
+                });
             }
-
-
-            var index_code = title.indexOf("股票代码")
-            var index_name = title.indexOf("股票简称")
-            var index_nowPrice = title.indexOf("现价(元)")
-            var index_zhangdiefu = title.indexOf("涨跌幅(%)")
-
-            title.forEach(item => {
-                if (item instanceof object) {
-                    var key = (Object.keys(item))[0]
-                    if(/涨跌幅:前复权(%)/.test(key)){
-
-                    }
-                } else {
-
-                }
+            
+            var GPList = result.map(item=>{
+                return GP.CreateGP(item,title)
             })
 
+            resolve(GPList);
         })
     })
 }
@@ -94,7 +85,7 @@ export function GetGpDataAsync() {
 export function AddZiXuan(stockcodes) {
     return new Promise((resolve, reject) => {
         $.post(URL_add_zixuan, { 'stockcodes[]': stockcodes }, (s) => {
-            console.log(s)
+            console.log(s);
         })
     })
 }
