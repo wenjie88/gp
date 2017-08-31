@@ -33,33 +33,33 @@ class GP {
 
     get template() {
         return {
-            "代码01": this.code,
-            "代码02": this.name,
-            "代码03": this.nowprice,
-            "代码04": this.UpDownPencent,
-            "代码05": this.UpDownPencentArr,
-            "代码06": this.VolPaperArr,
-            "代码07": this.OpenPriceArr,
-            "代码08": this.HighPriceArr,
-            "代码09": this.LowPriceArr,
-            "代码10": this.ClosePriceArr,
-            "代码11": this.ZhenFuPencentArr,
-            "代码12": this.UpDownPencentTotal,
-            "代码13": this.ZhenFuPencentTotal,
-            "代码14": this.UpDownMoneyTotal,
-            "代码15": this.VolPaperTotal,
-            "代码16": this.VolValTotal,
-            "代码17": this.jun_10,
-            "代码18": this.jun_20,
-            "代码19": this.jun_30,
-            "代码20": this.jun_60,
-            "代码21": this.jun_180,
-            "代码22": this.jun_250,
-            "代码23": this.SignBuy,
-            "代码24": this.LookLike,
-            "代码25": this.PE,
-            "代码26": this.PB,
-            "代码27": this.AllPaper,
+            "股票代码": "code",
+            "股票简称": "name",
+            "现价(元)": "nowprice",
+            "涨跌幅(%)": "UpDownPencent",
+            "涨跌幅:前复权(%)": "UpDownPencentArr",
+            "成交量(股)": "VolPaperArr",
+            "开盘价:前复权(元)": "OpenPriceArr",
+            "最高价:前复权(元)": "HighPriceArr",
+            "最低价:前复权(元)": "LowPriceArr",
+            "收盘价:前复权(元)": "ClosePriceArr",
+            "振幅(%)": "ZhenFuPencentArr",
+            "区间涨跌幅:前复权(%)": "UpDownPencentTotal",
+            "区间振幅(%)": "ZhenFuPencentTotal",
+            "区间涨跌(元)": "UpDownMoneyTotal",
+            "区间成交量(股)": "VolPaperTotal",
+            "区间成交额(元)": "VolValTotal",
+            "10日均线": "jun_10",
+            "20日均线": "jun_20",
+            "30日均线": "jun_30",
+            "60日均线": "jun_60",
+            "180日均线": "jun_180",
+            "250日均线": "jun_250",
+            "买入信号": "SignBuy",
+            "技术形态": "LookLike",
+            "市盈率(pe)": "PE",
+            "市净率(pb)": "PB",
+            "总股本(股)": "AllPaper",
         }
     }
 
@@ -72,19 +72,17 @@ class GP {
      */
     static CreateGP(item, TitleList) {
         var gp = new GP();
-        for (var i = 0; i < title.length; index++) {
-            var _titleName = title[i]
+        for (var i = 0; i < TitleList.length; i++) {
+            var _titleName = TitleList[i]
             var PropertyName = ""
             if (typeof (_titleName) === 'string') {
-                //PropertyName = gp.template[_titleName.replace(/(<br>[\w|\.|\-]+)/, "")];
-                gp.template[_titleName.replace(/(<br>[\w|\.|\-]+)/, "")] = item[i]
+                PropertyName = gp.template[_titleName.replace(/(<br>[\w|\.|\-]+)/, "")];
             } else {
                 for (var key in _titleName) {
-                    gp.template[_titleName.replace(/(<br>[\w|\.|\-]+)/, "")] = item[i]
-                    // PropertyName = gp.template[key.replace(/(<br>[\w|\.|\-]+)/, "")];
+                    PropertyName = gp.template[key.replace(/(<br>[\w|\.|\-]+)/, "")];
                 }
             }
-            // gp[PropertyName] = item[i];
+            gp[PropertyName] = item[i];
         }
         return gp
     }

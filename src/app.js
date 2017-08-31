@@ -3,24 +3,29 @@ import GP from './gp.js';
 import * as GPServer from './gpServer.js';
 import GPFilter from './gpfilter.js';
 
-// var list = [
-//     new GP("11", '001', 1, [100, 200, 300]),
-//     new GP("11", '002', 2, [100, 300, 200]),
-//     new GP("11", '003', 3, [200, 100, 300]),
-//     new GP("22", '004', 4, [200, 300, 100]),
-//     new GP("22", '005', 5, [300, 200, 300]),
-//     new GP("33", '006', 6, [300, 100, 200]),
-//     new GP("44", '007', 7, [100, 200, 300]),
-// ]
 
-(async function ss() {
+
+window.foo = async function() {
     var list = await GPServer.GetGpData();
-    var fi = new GPFilter(list)
-    fi.diefu(0)
-        .valformat([".|:", "|.:"])
+    list = new GPFilter(list)
+        .diefu("1%")
+        .valformat([":|."])
+        // .OverJunXian(["180", "60"])
+        // .NearJunXian(["30", "60", "180"], "10%")
+        .gplist;
 
+    GPServer.AddZiXuan(list.map(item => { return item.code }))
 
-    console.log(fi.gplist)
+    console.log(new Data())
+    console.log(list)
+}
 
-})()
+setInterval(function () {
+    var _d = new Date()
+    if (_d.getHours() === 14 && _d.getMinutes() == 30) {
+        foo()
+    } else if (_d.getHours() === 15 && _d.getMinutes() == 0) {
+        foo()
+    }
 
+}, 1000 * 60)

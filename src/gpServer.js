@@ -30,7 +30,7 @@ function LoadNextPage(token, page, pageSize) {
  * @returns {GP[]} 
  */
 export function GetGpData() {
-    return  new Promise((resolve, reject) => {
+    return new Promise((resolve, reject) => {
         const Server_Parmas = {
             ts: 1,
             f: 1,
@@ -65,20 +65,26 @@ export function GetGpData() {
                     promiseList.push(LoadNextPage(token, page + i, perpage));
                 }
 
-                Promise.all(promiseList).then(resultArr => {
-                    resultArr.forEach(item => {
-                        result.push(...item);
-                    });
-                });
-            }
-            
-            var GPList = result.map(item=>{
-                return GP.CreateGP(item,title)
-            })
+                //等待所有页数请求
+                Promise
+                    .all(promiseList)
+                    .then(resultArr => {
+                        resultArr.forEach(item => {
+                            result.push(...item);
+                        });
 
-            resolve(GPList);
+                        var GPList = result.map(item => {
+                            return GP.CreateGP(item, title)
+                        })
+
+                        resolve(GPList);
+                    });
+            }
         })
+
     })
+
+
 }
 
 
