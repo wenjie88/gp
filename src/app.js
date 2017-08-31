@@ -16,7 +16,7 @@ window.foo = async function() {
 
     GPServer.AddZiXuan(list.map(item => { return item.code }))
 
-    console.log(new Data())
+    console.log(new Date())
     console.log(list)
 }
 
