@@ -60,6 +60,7 @@ class GP {
             "市盈率(pe)": "PE",
             "市净率(pb)": "PB",
             "总股本(股)": "AllPaper",
+            "macd(macd值)":"MacdArr"
         }
     }
 

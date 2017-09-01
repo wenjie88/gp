@@ -9,7 +9,7 @@ window.foo = async function() {
     var list = await GPServer.GetGpData();
     list = new GPFilter(list)
         .diefu("1%")
-        .valformat([":|."])
+        .valformat([":|.","|:."])
         // .OverJunXian(["180", "60"])
         // .NearJunXian(["30", "60", "180"], "10%")
         .gplist;

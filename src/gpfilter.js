@@ -10,6 +10,12 @@ class GPFilter {
         this.gplist = gplist
     }
 
+
+
+
+
+
+
     /**
     * 
     * @param {String} min 最小  default: 0%
@@ -21,6 +27,10 @@ class GPFilter {
         })
         return this;
     }
+
+
+
+
 
     /**
      * 
@@ -83,6 +93,10 @@ class GPFilter {
 
 
 
+
+
+
+
     /**
      * 
      * @param {String[]} Lines "10","20"....."250""
@@ -106,6 +120,11 @@ class GPFilter {
         this.gplist = returnlist;
         return this;
     }
+
+
+
+
+
 
 
     /**
@@ -140,6 +159,14 @@ class GPFilter {
         return this;
     }
 
+
+
+
+
+
+    Macd(){
+        
+    }
 }
 
 
