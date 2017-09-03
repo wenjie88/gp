@@ -99,9 +99,9 @@ class GPFilter {
 
     /**
      * 
-     * @param {String[]} Lines "10","20"....."250""
+     * @param {String[]} Lines ["10","20","250"]
      */
-    OverJunXian(Lines) {
+    OverJunXian_and(Lines) {
 
         if (Lines === undefined) throw "Lines 不能为空 !";
 
@@ -122,6 +122,30 @@ class GPFilter {
     }
 
 
+    /**
+       * 
+       * @param {String} Lines "10||20||250"
+       */
+    OverJunXian_or(Lines) {
+
+        if (Lines === undefined) throw "Lines 不能为空 !";
+
+        var LineArr = Lines.split("||");
+
+        const returnlist = []
+        this.gplist.forEach(item => {
+            for (var i = 0; i < LineArr.length; i++) {
+                var day = LineArr[i]
+                if (Number(item.nowprice) > Number(item["jun_" + day])) {
+                    returnlist.push(item);
+                    break;
+                }
+            }
+        })
+        this.gplist = returnlist;
+        return this;
+    }
+
 
 
 
@@ -132,7 +156,7 @@ class GPFilter {
      * @param {String[]} Lines "10","20"....."250" 
      * @param {String} NearUpDownPercent 均线附近上下幅度 default : "1%"
      */
-    NearJunXian(Lines, NearUpDownPercent = "1%") {
+    NearJunXian_and(Lines, NearUpDownPercent = "1%") {
         if (Lines === undefined) throw "Lines 不能为空 !";
 
         NearUpDownPercent = Number(NearUpDownPercent.replace("%", "")) * 0.01
@@ -161,11 +185,41 @@ class GPFilter {
 
 
 
+    /**
+      * 
+      * @param {String} Lines "10||20||250" 
+      * @param {String} NearUpDownPercent 均线附近上下幅度 default : "1%"
+      */
+    NearJunXian_or(Lines, NearUpDownPercent = "1%") {
+        if (Lines === undefined) throw "Lines 不能为空 !";
+        var LineArr = Lines.split("||");
+
+        NearUpDownPercent = Number(NearUpDownPercent.replace("%", "")) * 0.01
+
+        const returnlist = []
+        this.gplist.forEach(item => {
+            for (var i = 0; i < LineArr.length; i++) {
+                var day = LineArr[i]
+                var _NowPrice = Number(item.nowprice)
+                var cha = _NowPrice * NearUpDownPercent
+                var JunPrice = Number(item["jun_" + day])
+                var heigh = JunPrice + cha //最大
+                var low = JunPrice - cha   //最小
+                if (_NowPrice <= heigh && _NowPrice >= low) {
+                    returnlist.push(item);
+                    break;
+                }
+            }
+        })
+
+        this.gplist = returnlist;
+        return this;
+    }
 
 
 
-    Macd(){
-        
+    Macd() {
+
     }
 }
 

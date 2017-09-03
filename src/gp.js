@@ -28,7 +28,8 @@ class GP {
         this.PE = "";
         this.PB = "";
         this.AllPaper = "";
-    }
+        this.MacdArr = [];
+        }
 
 
     get template() {
