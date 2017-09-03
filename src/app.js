@@ -8,8 +8,8 @@ import GPFilter from './gpfilter.js';
 window.foo = async function() {
     var list = await GPServer.GetGpData();
     list = new GPFilter(list)
-        .diefu("2%")
-        .NearJunXian_or("20||30||60||180","2%")
+        .diefu("2.5%")
+        .NearJunXian_or("30||60||180","1%")
         .gplist;
         // .valformat([":|.","|:."])
         // .OverJunXian(["180", "60"])

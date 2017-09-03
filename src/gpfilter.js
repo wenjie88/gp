@@ -218,6 +218,9 @@ class GPFilter {
 
 
 
+
+
+
     Macd() {
 
     }
