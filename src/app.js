@@ -10,6 +10,7 @@ window.foo = async function() {
     list = new GPFilter(list)
         .diefu("2.5%")
         .NearJunXian_or("30||60||180","1%")
+        .chuangyeban()
         .gplist;
         // .valformat([":|.","|:."])
         // .OverJunXian(["180", "60"])
