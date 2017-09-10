@@ -11,8 +11,13 @@ class GPFilter {
     }
 
 
-
-
+    //排除创业板
+    chuangyeban() {
+        this.gplist = this.gplist.filter(item => {
+            return !(item.code.startsWith("3"));
+        })
+        return this;
+    }
 
 
 
