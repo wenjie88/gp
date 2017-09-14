@@ -1,5 +1,4 @@
 
-
 setInterval(function () {
     var _d = new Date()
     if (_d.getHours() === 14 && _d.getMinutes() == 30) {
@@ -68,14 +67,12 @@ function WJGP() {
 
             $.getJSON(url_config.search, parmas, (re) => {
                 var res_data = re.data.result
-                token = res_data.token     //token  再获取下一页的时候需要用到
+                token = res_data.token     //token  
                 var title = (res_data.title[4])["涨跌幅:前复权(%)"]
                 var day3 = title[0]
                 var day2 = title[1]
                 var day1 = title[2]
-
                 parmas.w += `,${day2}的成交量>${day1}的成交量>${day3}的成交量, 10日均线,20日均线,30日均线,60日均线,180日均线,250日均线`
-
 
                 resolve()
             })
@@ -179,7 +176,6 @@ function WJGP() {
             region_percent_arr.forEach(num => {
                 sum_percent += Number(num)
             })
-
             if (Math.abs(sum_percent) < 2.0) continue
 
             //2.1 第二天跌幅少于1.5%的排除
@@ -189,7 +185,6 @@ function WJGP() {
             // if (Math.abs(Number(region_percent_arr[0])) > 1.8) continue
 
             //4.第二日不是长实体阴的排除 (最高价-开盘价 < 开盘价-收盘价 && 收盘价-最低价 < 开盘价-收盘价 )
-
             // var shangying_xian = Math.abs(Number(region_high_price_arr[1]) - Number(region_open_price_arr[1])) //上影
             // var xiaying_xian = Math.abs(Number(region_low_price_arr[1]) - Number(region_low_close_arr[1])) //下影
             // var shiti_xian = Math.abs(Number(region_open_price_arr[1]) - Number(region_low_close_arr[1])) //实体

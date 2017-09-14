@@ -1,11 +1,12 @@
 ﻿{
     "author": "WenJie",
-    "background": {
-        "scripts": [
-            "lib/js/src/jquery.min.js",
-            "lib/js/background.js"
-        ]
-    },
+    // "background": {
+    //     "scripts": [
+    //         "./js/main.bundle.js"
+    //         // "lib/js/src/jquery.min.js",
+    //         // "lib/js/background.js"
+    //     ]
+    // },
     "browser_action": {
         "default_icon": "icon-16.png",
         "default_popup": "app.html"
@@ -13,8 +14,7 @@
     "content_scripts": [
         {
             "js": [
-                "lib/js/src/jquery.min.js",
-                "lib/js/inject.js"
+                "./js/main.bundle.js"
             ],
             "matches": [
                 "http://www.iwencai.com/*"
