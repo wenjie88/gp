@@ -34,7 +34,7 @@ export function GetGpData() {
         const Server_Parmas = {
             ts: 1,
             f: 1,
-            type: 0,
+            typed: 0,
             qs: "result_original",
             tid: "stockpick",
             selfsectsn: "",
@@ -44,7 +44,6 @@ export function GetGpData() {
             preParams: "",
             w: "连续下跌3日，3日成交量, 10日均线，20日均线，30日均线，60日均线，180日均线，250日均线，连续3日的macd",
         }
-
 
         $.getJSON(URL_search, Server_Parmas, (response) => {
 
