@@ -19,13 +19,24 @@ class GPFilter {
         return this;
     }
 
+    /**
+    * 当前跌幅
+    * @param {String} min 最小跌幅  default: 0%
+    */
+    diefu(min) {
+        min = Number(min.replace("%", ""))
+        this.gplist = this.gplist.filter(item => {
+            return item.UpDownPencent < 0 && Math.abs(item.UpDownPencent) > min
+        })
+        return this;
+    }
 
 
     /**
-    * 
+    * 多日总跌幅
     * @param {String} min 最小  default: 0%
     */
-    diefu(min) {
+    TotalDiefu(min) {
         min = Number(min.replace("%", ""))
         this.gplist = this.gplist.filter(item => {
             return Math.abs(item.UpDownPencentTotal) > min
@@ -222,6 +233,37 @@ class GPFilter {
     }
 
 
+
+    /**
+     * 股价在均线之上
+     * @param {String} Lines "10||20||250" 
+     * @param {String} NearUpDownPercent 均线之上 default : "1%"
+     */
+    AboveJunXian_or(Lines, Percent = "1%") {
+        if (Lines === undefined) throw "Lines 不能为空 !";
+        var LineArr = Lines.split("||");
+
+        NearUpDownPercent = Number(NearUpDownPercent.replace("%", "")) * 0.01
+
+        const returnlist = []
+        this.gplist.forEach(item => {
+            for (var i = 0; i < LineArr.length; i++) {
+                var day = LineArr[i]
+                var _NowPrice = Number(item.nowprice)
+                var cha = _NowPrice * NearUpDownPercent
+                var JunPrice = Number(item["jun_" + day])
+                var heigh = JunPrice + cha //最大
+                var low = JunPrice
+                if (_NowPrice <= heigh && _NowPrice >= low) {
+                    returnlist.push(item);
+                    break;
+                }
+            }
+        })
+
+        this.gplist = returnlist;
+        return this;
+    }
 
 
 

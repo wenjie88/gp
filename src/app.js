@@ -9,10 +9,10 @@ window.foo = async function() {
     var list = await GPServer.GetGpData();
     console.log(list)
     list = new GPFilter(list)
-        // .diefu("2.5%")
-        // .NearJunXian_or("30||60||180","1%")
+        .diefu("1.5%")
+        .AboveJunXian_or("30||60||180","1.5%")
         .chuangyeban()
-        .NearJunXian_and(["30", "60"],"1%")
+        //.NearJunXian_and(["30", "60"],"1%")
         .gplist;
 
     GPServer.AddZiXuan(list.map(item => { return item.code }))
