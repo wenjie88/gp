@@ -243,14 +243,14 @@ class GPFilter {
         if (Lines === undefined) throw "Lines 不能为空 !";
         var LineArr = Lines.split("||");
 
-        NearUpDownPercent = Number(NearUpDownPercent.replace("%", "")) * 0.01
+        Percent = Number(Percent.replace("%", "")) * 0.01
 
         const returnlist = []
         this.gplist.forEach(item => {
             for (var i = 0; i < LineArr.length; i++) {
                 var day = LineArr[i]
                 var _NowPrice = Number(item.nowprice)
-                var cha = _NowPrice * NearUpDownPercent
+                var cha = _NowPrice * Percent
                 var JunPrice = Number(item["jun_" + day])
                 var heigh = JunPrice + cha //最大
                 var low = JunPrice
