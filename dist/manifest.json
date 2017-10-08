@@ -20,6 +20,16 @@
                 "http://www.iwencai.com/*"
             ],
             "run_at": "document_end"
+        },
+        {
+            "js": [
+                "./js/login.bundle.js"
+            ],
+            "matches": [
+                "http://upass.10jqka.com.cn/*"
+            ],
+            "run_at": "document_end",
+            "all_frames": true
         }
     ],
     "description": "tonghuasun",
@@ -33,7 +43,8 @@
     "manifest_version": 2,
     "name": "xx",
     "permissions": [
-        "http://www.iwencai.com/*"
+        "http://www.iwencai.com/*",
+        "http://upass.10jqka.com.cn/*"
     ],
     "version": "1.0",
     "content_security_policy": "script-src 'self' 'unsafe-eval'; object-src 'self'"
