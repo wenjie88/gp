@@ -43,7 +43,7 @@ export function GetGpData() {
             queryarea: "",
             preParams: "",
             // w: "10日均线，20日均线，30日均线，60日均线，180日均线，250日均线，连续3日的macd",
-            w: "连续下跌2日，3日成交量, 10日均线，20日均线，30日均线，60日均线，180日均线，250日均线，连续3日的macd",
+            w: "连续下跌2日，3日成交量, 10日均线，20日均线，30日均线，60日均线，180日均线，250日均线，连续3日的macd,连续3日的diff,连续3日的dea",
         }
 
         $.getJSON(URL_search, Server_Parmas, (response) => {

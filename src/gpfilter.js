@@ -269,7 +269,7 @@ class GPFilter {
 
 
     Macd() {
-
+        
     }
 }
 

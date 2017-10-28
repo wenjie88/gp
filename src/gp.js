@@ -29,6 +29,8 @@ class GP {
         this.PB = "";
         this.AllPaper = "";
         this.MacdArr = [];
+        this.DiffArr = [];
+        this.DeaArr = [];
         }
 
 
@@ -61,7 +63,9 @@ class GP {
             "市盈率(pe)": "PE",
             "市净率(pb)": "PB",
             "总股本(股)": "AllPaper",
-            "macd(macd值)":"MacdArr"
+            "macd(macd值)":"MacdArr",
+            "macd(diff值)":"DiffArr",
+            "macd(dea值)":"DeaArr"
         }
     }
 

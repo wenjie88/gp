@@ -21,12 +21,17 @@ import $ from './jquery.min.js';
 */
 setInterval(function () {
     var _d = new Date()
-    if (_d.getHours() === 14 && _d.getMinutes() == 30) {
-        foo()
-    } else if (_d.getHours() === 15 && _d.getMinutes() == 0) {
-        foo()
-    } else if (_d.getHours() === 9 && _d.getMinutes() == 0) {
-        window.location.reload()
+    var _hour = _d.getHours()
+    var _min = _d.getMinutes()
+    var timeStr = _hour + ':' + _min
+    switch (timeStr) {
+        case '14:30':
+        case '15:0':
+            foo()
+            break;
+        case '12:0':
+            window.location.reload()
+            break;
     }
 }, 1000 * 60)
 
