@@ -39,7 +39,7 @@ class GPFilter {
     TotalDiefu(min) {
         min = Number(min.replace("%", ""))
         this.gplist = this.gplist.filter(item => {
-            return Math.abs(item.Sum_ZhenFuPencent) >= min
+            return Math.abs(item.Sum_ZhangDiePencent) >= min
         })
         return this;
     }
