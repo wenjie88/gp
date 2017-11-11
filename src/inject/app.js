@@ -57,7 +57,7 @@ window.foo = async function () {
     //     //.NearJunXian_and(["30", "60"],"1%")
     //     .gplist;
 
-    // GPServer.AddZiXuan(list.map(item => { return item.code }))
+    GPServer.AddZiXuan(list.map(item => { return item.code }))
 
 
     // console.log(new Date())
