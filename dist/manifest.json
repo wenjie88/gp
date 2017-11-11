@@ -14,7 +14,7 @@
     "content_scripts": [
         {
             "js": [
-                "./js/main.bundle.js"
+                "./js/inject.bundle.js"
             ],
             "matches": [
                 "http://www.iwencai.com/*"
@@ -32,7 +32,7 @@
             "all_frames": true
         }
     ],
-    "description": "tonghuasun",
+    "description": "炒股必胜法",
     "homepage_url": "http://www.iwencai.com/",
     "icons": {
         "128": "icon-128.png",

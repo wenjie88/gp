@@ -5,7 +5,7 @@ var path = require('path')
 
 
 module.exports = {
-    entry: {main:['babel-polyfill','./src/app.js'],login:'./src/login.js'},
+    entry: {inject:['babel-polyfill','./src/inject/app.js'],login:'./src/inject/login.js'},
     output: {
         path: __dirname + '/dist',
         // filename: '[name]-[hash:5].js'

@@ -2,7 +2,7 @@ import "babel-polyfill";
 import GP from './gp.js';
 import * as GPServer from './gpServer.js';
 import GPFilter from './gpfilter.js';
-import $ from './jquery.min.js';
+import $ from '../lib/jquery.min.js';
 
 
 /**
@@ -40,18 +40,29 @@ setInterval(function () {
 window.foo = async function () {
     var list = await GPServer.GetGpData();
     console.log(list)
-    list = new GPFilter(list)
-        .TotalDiefu("2.5%")
-        .AboveJunXian_or("30||60||180", "1.5%")
-        .chuangyeban()
-        //.NearJunXian_and(["30", "60"],"1%")
-        .gplist;
 
-    GPServer.AddZiXuan(list.map(item => { return item.code }))
+    list = new GPFilter(list).chuangyeban()
+                             .TotalDiefu('2%')
+                             .f2('1.5%')
+                             .valformat([':|.','|:.'])
+                             .TotalHuanShou('2%')
+                             .TotalDays(250)
+                             .gplist
+    
+    
+    // list = new GPFilter(list)
+    //     .TotalDiefu("2.5%")
+    //     .AboveJunXian_or("30||60||180", "1.5%")
+    //     .chuangyeban()
+    //     //.NearJunXian_and(["30", "60"],"1%")
+    //     .gplist;
+
+    // GPServer.AddZiXuan(list.map(item => { return item.code }))
 
 
-    console.log(new Date())
+    // console.log(new Date())
     console.log(list)
+
 }
 
 

@@ -23,13 +23,13 @@ class GPFilter {
     * 当前跌幅
     * @param {String} min 最小跌幅  default: 0%
     */
-    diefu(min) {
-        min = Number(min.replace("%", ""))
-        this.gplist = this.gplist.filter(item => {
-            return item.UpDownPencent < 0 && Math.abs(item.UpDownPencent) > min
-        })
-        return this;
-    }
+    // diefu(min) {
+    //     min = Number(min.replace("%", ""))
+    //     this.gplist = this.gplist.filter(item => {
+    //         return item.ZhangDiePencent < 0 && Math.abs(item.ZhangDiePencent) > min
+    //     })
+    //     return this;
+    // }
 
 
     /**
@@ -39,13 +39,60 @@ class GPFilter {
     TotalDiefu(min) {
         min = Number(min.replace("%", ""))
         this.gplist = this.gplist.filter(item => {
-            return Math.abs(item.UpDownPencentTotal) > min
+            return Math.abs(item.Sum_ZhenFuPencent) >= min
         })
         return this;
     }
 
 
+    /**
+    * 中间日跌幅
+    * @param {String} min 最小  default: 0%
+    */
+    f2(min) {
+        min = Number(min.replace("%", ""))
+        this.gplist = this.gplist.filter(item => {
+            var open = Number(item.Arr_OpenPrice[1])
+            var close = Number(item.Arr_ClosePrice[1])
+            var high = Number(item.Arr_HighPrice[1])
+            var low = Number(item.Arr_LowPrice[1])
+            //中间日的 实体必须大于影线
+            var shi_ti = open-close
+            var shang_y = high - open
+            var xia_y = close - low
 
+            var b = shi_ti > shang_y && shi_ti > xia_y
+            return Math.abs(item.Arr_ZhangDiePencent[1]) >= min && b
+        })
+        return this;
+
+    }
+
+
+
+    /**
+    * 多日总换手
+    * @param {String} min 最小  default: 0%
+    */
+    TotalHuanShou(min) {
+        min = Number(min.replace("%", ""))
+        this.gplist = this.gplist.filter(item => {
+            return Number(item.Sum_ChengjiaoGu) * 100 / Number(item.LiuTong_GuBen) >= min
+        })
+        return this;
+    }
+
+
+    /**
+    * 上市天数
+    * @param {Number} min 最小  default: 180
+    */
+    TotalDays(min) {
+        this.gplist = this.gplist.filter(item => {
+            return Number(item.Days) >= min
+        })
+        return this;
+    }
 
 
     /**
@@ -64,15 +111,15 @@ class GPFilter {
         var GroupFormat = {}
 
         this.gplist.forEach(item => {
-            var one = item.VolPaperArr[0] //29号
-            var two = item.VolPaperArr[1]  //28号
-            var three = item.VolPaperArr[2] //27号  由大到小
+            var one = item.Arr_ChengjiaoGu[0] //29号
+            var two = item.Arr_ChengjiaoGu[1]  //28号
+            var three = item.Arr_ChengjiaoGu[2] //27号  由大到小
 
             var arr = [one, two, three].sort((a, b) => a - b)
 
             var format = ""
             for (var i = 0; i < arr.length; i++) {
-                var index = arr.indexOf(item.VolPaperArr[arr.length - 1 - i])
+                var index = arr.indexOf(item.Arr_ChengjiaoGu[arr.length - 1 - i])
                 switch (index) {
                     case 0:
                         format += "."
@@ -269,7 +316,7 @@ class GPFilter {
 
 
     Macd() {
-        
+
     }
 }
 
